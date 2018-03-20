@@ -1,0 +1,53 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10px;
+}
+
+form {
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+fildset {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+legend {
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+}
+
+label {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+input {
+    width: 300px;
+    height: 40px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+}
+
+input[type='button'] {
+    border: 1px solid;
+    background: #ffffff;
+    cursor: pointer;
+    margin-top: 50px;
+}
+
+a {
+    font-size: 0.9rem;
+    color: #000000;
+}
+
+a:visited {
+    color: #000000;
+}
+
+a:hover {
+    color: darkblue;
+}
