@@ -89,13 +89,3 @@ class API extends Component {
 }
 
 export default API;
-
-
-// const userData = {
-//     username: ev.target.username.value,
-//     password: ev.target.password.value,
-//     password_repeat: ev.target.password_repeat.value,
-//     email: ev.target.email.value,
-//     store_id: ev.target.store_id.value,
-//     store_password: ev.target.store_password.value,
-// };
