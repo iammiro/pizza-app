@@ -6,6 +6,9 @@ class API extends Component {
     constructor() {
         super();
         this._authService = new AuthService();
+        this.host = document.createElement('div');
+        this.host.classList.add('container');
+
     }
 
     getStoreListFromApi(){
