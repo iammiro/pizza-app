@@ -1,6 +1,7 @@
-import {Component} from './framework';
-import {Login} from "./src/components/Login";
-import {Registration} from "./src/components/Registration";
+import style from './src/css/styles.css';
+import Component from './src/framework/Component';
+import Login from "./src/components/Login";
+import Registration from "./src/components/Registration";
 
 class App extends Component {
     constructor() {
@@ -13,12 +14,10 @@ class App extends Component {
     }
 
     render() {
-
         const toRender = [
             this._login.update(),
-            this._registration.update()
+            // this._registration.update()
         ];
-
         return toRender;
     }
 }

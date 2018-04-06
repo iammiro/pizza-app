@@ -11,7 +11,7 @@ class API extends Component {
 
     }
 
-    getStoreListFromApi(){
+    getStoreListFromApi() {
         const headers = new Headers();
         headers.append('content-type', 'application/json');
         fetch('https://pizza-tele.ga/api/v1/store/list', {
@@ -22,24 +22,15 @@ class API extends Component {
             .then(console.log);
     }
 
-    get() {
-
+    setDataToLocalStorage(data) {
+        localStorage.setItem('token', `${data}`);
     }
 
-    post() {
-
-    }
-
-    login() {
-        const data = {
-            "username": "iammiro",
-            "password": "secret42"
-        };
-
+    login(data) {
         const headers = new Headers();
         headers.append('Access-Control-Allow-Credentials', 'true');
         headers.append('Content-Type', 'application/json');
-        fetch('https://pizza-tele.ga/api/v1/user/login', {
+        return fetch('https://pizza-tele.ga/api/v1/user/login', {
             body: JSON.stringify(data),
             method: 'POST',
             headers,
@@ -48,10 +39,10 @@ class API extends Component {
             .then(console.log);
     }
 
-    showInfo(){
+    showInfo(data) {
         const headers = new Headers();
         headers.append('content-type', 'application/json');
-        headers.append('authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjEzNDE0MDYsInVzZXJuYW1lIjoiaWFtbWlybyIsInV1aWQiOiI4NDc4MDhkOC00YTRlLTQ5MzgtYjJlZC02MzViNjQ5Y2U1NjQiLCJzdG9yZV9pZCI6MX0.vinKv8GadXMzMRkQRXltegQ_44z97wqG7uHULQB5i1s')
+        headers.append('authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjMwNjA2MjIsInVzZXJuYW1lIjoiaWFtbWlybyIsInV1aWQiOiI4NDc4MDhkOC00YTRlLTQ5MzgtYjJlZC02MzViNjQ5Y2U1NjQiLCJzdG9yZV9pZCI6MX0.aZyFT91XquXaq9YJrIgBXeA4qVbKtt0lZxoEQXxjjGM')
         fetch('https://pizza-tele.ga/api/v1/user/my_info', {
             method: 'GET',
             headers,
@@ -60,19 +51,19 @@ class API extends Component {
             .then(console.log);
     }
 
-    logOut(){
+    logOut() {
 
     }
 
-    register() {
-        const data = {
-            "username": "iammiro",
-            "password": "dfkjw3#$trfds",
-            "password_repeat": "dfkjw3#$trfds",
-            "email": "mir.kolomiets@gmail.com",
-            "store_id": 6,
-            "store_password": "w&jXD4jVw2>!"
-        };
+    register(data) {
+        // const data = {
+        //     "username": "iammiro",
+        //     "password": "dfkjw3#$trfds",
+        //     "password_repeat": "dfkjw3#$trfds",
+        //     "email": "mir.kolomiets@gmail.com",
+        //     "store_id": 6,
+        //     "store_password": "w&jXD4jVw2>!"
+        // };
 
         const headers = new Headers();
         headers.append('Access-Control-Allow-Credentials', 'true');

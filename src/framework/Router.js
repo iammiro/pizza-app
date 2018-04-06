@@ -1,5 +1,5 @@
-import {Registration} from "../components/Registration";
-import {Login} from "../components/Login";
+import Registration from "../components/Registration";
+import Login from "../components/Login";
 import Component from "../framework/Component";
 
 class Router extends Component {
