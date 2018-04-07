@@ -14,9 +14,6 @@ class Login extends Component {
     }
 
     onSubmit(e) {
-        //     "username": "iammiro",
-        //     "password": "secret42"
-
         e.preventDefault();
         const data = {};
         data.username = e.target.login.value.trim();

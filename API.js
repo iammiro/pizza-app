@@ -11,6 +11,12 @@ class API extends Component {
 
     }
 
+    parseJwtToken() {
+        const auth = window.localStorage;
+        const token = auth.getItem('token');
+        return this._authService.parseJwtClaims(token);
+    }
+
     getStoreListFromApi() {
         const headers = new Headers();
         headers.append('content-type', 'application/json');
@@ -22,10 +28,6 @@ class API extends Component {
             .then(console.log);
     }
 
-    setDataToLocalStorage(data) {
-        localStorage.setItem('token', `${data}`);
-    }
-
     login(data) {
         const headers = new Headers();
         headers.append('Access-Control-Allow-Credentials', 'true');
@@ -35,14 +37,29 @@ class API extends Component {
             method: 'POST',
             headers,
         })
-            .then(res => res.json())
-            .then(console.log);
+            .then(function (res) {
+                return res.json();
+            })
+            .then(function (res) {
+                console.log(res.token);
+                return res.token;
+            })
+            .then(function (token) {
+                const auth = window.localStorage;
+                auth.setItem(`token`, `${token}`);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
-    showInfo(data) {
+    showInfo() {
         const headers = new Headers();
+        const auth = window.localStorage;
+        const token = auth.getItem('token');
+
         headers.append('content-type', 'application/json');
-        headers.append('authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MjMwNjA2MjIsInVzZXJuYW1lIjoiaWFtbWlybyIsInV1aWQiOiI4NDc4MDhkOC00YTRlLTQ5MzgtYjJlZC02MzViNjQ5Y2U1NjQiLCJzdG9yZV9pZCI6MX0.aZyFT91XquXaq9YJrIgBXeA4qVbKtt0lZxoEQXxjjGM')
+        headers.append('authorization', `Bearer ${token}`);
         fetch('https://pizza-tele.ga/api/v1/user/my_info', {
             method: 'GET',
             headers,
@@ -52,19 +69,11 @@ class API extends Component {
     }
 
     logOut() {
-
+        const auth = window.localStorage;
+        auth.removeItem('token');
     }
 
     register(data) {
-        // const data = {
-        //     "username": "iammiro",
-        //     "password": "dfkjw3#$trfds",
-        //     "password_repeat": "dfkjw3#$trfds",
-        //     "email": "mir.kolomiets@gmail.com",
-        //     "store_id": 6,
-        //     "store_password": "w&jXD4jVw2>!"
-        // };
-
         const headers = new Headers();
         headers.append('Access-Control-Allow-Credentials', 'true');
         headers.append('Content-Type', 'application/json');
@@ -78,7 +87,10 @@ class API extends Component {
     }
 
     get isAuthorized() {
-
+        const parsedToken = this.parseJwtToken();
+        const expirationTime = parsedToken.exp;
+        const date = new Date(expirationTime*1000);
+        console.log(date);
     }
 }
 

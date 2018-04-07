@@ -13,13 +13,6 @@ class Registration extends Component {
     }
 
     onSubmit(e) {
-        // "username": "iammiro",
-        // "password": "dfkjw3#$trfds",
-        // "password_repeat": "dfkjw3#$trfds",
-        // "email": "mir.kolomiets@gmail.com",
-        // "store_id": 6,
-        // "store_password": "w&jXD4jVw2>!"
-
         e.preventDefault();
         const data = {};
         data.username = e.target.login.value.trim();
