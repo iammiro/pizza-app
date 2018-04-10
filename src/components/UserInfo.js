@@ -7,9 +7,8 @@ class UserInfo extends Component{
         this.host.classList.add('user-info-wrapper');
         }
 
-    render(data) {
+    render() {
         this.host.innerHTML = '';
-        console.log(data);
         return this.host.innerHTML = `<div>
                                         <div class="created_at">${data.created_at}</div>
                                         <div class="email">${data.email}</div>
