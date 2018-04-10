@@ -29,6 +29,8 @@ class App extends Component {
         ];
 
         this._api.showInfo();
+        this._api.getIngredients();
+        this._api.getTags();
         this._api.getStoreListFromApi();
         this._api.isAuthorized;
         return toRender;

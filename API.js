@@ -1,14 +1,16 @@
 import style from './src/css/styles.css';
-import Component from "./src/framework/Component";
 import {AuthService} from './src/utils/parseJwtClaims'
+
 // import UserInfo from './src/components/UserInfo';
 
-class API extends Component {
+class API {
     constructor() {
-        super();
         this._authService = new AuthService();
         this.host = document.createElement('div');
         this.host.classList.add('container');
+        this.domain = 'https://pizza-tele.ga';
+        this.ingredients_list = `${this.domain}/api/v1/ingredient/list`;
+        this.tags = `${this.domain}/api/v1/tag/list `;
         // this._userInfo = new UserInfo();
     }
 
@@ -16,6 +18,28 @@ class API extends Component {
         const auth = window.localStorage;
         const token = auth.getItem('token');
         return this._authService.parseJwtClaims(token);
+    }
+
+    getIngredients() {
+        let ingredients = [];
+        return this.get(this.ingredients_list).then(
+            data => {
+                ingredients = data.results;
+                console.log(ingredients);
+                return data.results;
+            }
+        )
+    }
+
+    getTags() {
+        let tags = [];
+        return this.get(this.tags).then(
+            data => {
+                tags = data.results;
+                console.log(tags);
+                return data.results;
+            }
+        )
     }
 
     getStoreListFromApi() {
@@ -97,10 +121,26 @@ class API extends Component {
             .then(console.log);
     }
 
+    get(url) {
+        const auth = window.localStorage;
+        const token = auth.getItem('token');
+        return fetch(url, {
+            method: 'GET',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            })
+        }).then(
+            response => Promise.resolve(response.json()),
+            response => Promise.reject(response.statusCode)
+        )
+    }
+
     get isAuthorized() {
         const parsedToken = this.parseJwtToken();
         const expirationTime = parsedToken.exp;
         const date = new Date(expirationTime * 1000);
+        console.log(`Expiration time: ${date}`)
     }
 }
 
