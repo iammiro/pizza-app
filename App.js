@@ -13,20 +13,24 @@ class App extends Component {
 
         this._api = new API();
         this._login = new Login();
-        this._registration = new Registration();
+        // this._registration = new Registration();
         this._userInfo = new UserInfo();
+
+        window.addEventListener('popstate', ({ state }) => {
+            this.updateState(state);
+        });
     }
 
     render() {
         const toRender = [
-            // this._login.update(),
+            this._login.update(),
             // this._registration.update(),
-            this._userInfo.update()
+            // this._userInfo.update()
         ];
+
         this._api.showInfo();
         this._api.getStoreListFromApi();
         this._api.isAuthorized;
-        console.log(this._api.parseJwtToken());
         return toRender;
     }
 }

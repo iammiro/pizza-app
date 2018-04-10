@@ -1,6 +1,7 @@
 import style from './src/css/styles.css';
 import Component from "./src/framework/Component";
 import {AuthService} from './src/utils/parseJwtClaims'
+// import UserInfo from './src/components/UserInfo';
 
 class API extends Component {
     constructor() {
@@ -8,7 +9,7 @@ class API extends Component {
         this._authService = new AuthService();
         this.host = document.createElement('div');
         this.host.classList.add('container');
-
+        // this._userInfo = new UserInfo();
     }
 
     parseJwtToken() {
@@ -25,7 +26,9 @@ class API extends Component {
             headers,
         })
             .then(res => res.json())
-            .then(console.log);
+            .then(
+                // console.log
+            );
     }
 
     login(data) {
@@ -41,7 +44,6 @@ class API extends Component {
                 return res.json();
             })
             .then(function (res) {
-                console.log(res.token);
                 return res.token;
             })
             .then(function (token) {
@@ -64,8 +66,17 @@ class API extends Component {
             method: 'GET',
             headers,
         })
-            .then(res => res.json())
-            .then(console.log);
+            .then(function (res) {
+                return res.json();
+            })
+            .then(function (res) {
+                console.log(res);
+                // this._userInfo.render(res);
+                return res;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     logOut() {
@@ -89,8 +100,7 @@ class API extends Component {
     get isAuthorized() {
         const parsedToken = this.parseJwtToken();
         const expirationTime = parsedToken.exp;
-        const date = new Date(expirationTime*1000);
-        console.log(date);
+        const date = new Date(expirationTime * 1000);
     }
 }
 

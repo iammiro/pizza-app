@@ -1,3 +1,8 @@
+const MIDNIGHT_HOURS = '00:00:00';
+const URL_PARAM_REGEXP = /:\w+/g;
+
+export const noop = () => {};
+
 export const toHtml = string => {
     const template = document.createElement('template');
     template.innerHTML = string.trim();
@@ -30,4 +35,40 @@ export const bindAll = (context, ...names) => {
             );
         }
     });
+};
+
+export const getMidnightWeather = list => {
+    return list.filter(({ dt_txt: date }) => date.includes(MIDNIGHT_HOURS));
+};
+
+export function RequestError(response) {
+    this.status = response.statusText;
+    this.code = response.status;
+}
+
+RequestError.prototype.toString = function() {
+    return `${this.code} - ${this.status}`;
+};
+
+export const isUrlParam = path => URL_PARAM_REGEXP.test(path);
+export const urlToRegExp = url => RegExp(`^${url.replace(URL_PARAM_REGEXP, '(.*)')}$`);
+export const isEqualPaths = (template, url) => urlToRegExp(template).test(url);
+
+export const extractUrlParams = (template, url) => {
+    const values = url.split('/');
+    const params = {};
+
+    if (!values) {
+        return params;
+    }
+
+    return template.split('/').reduce((acc, param, index) => {
+        if (!isUrlParam(param)) {
+            return acc;
+        }
+        //We need to remove ':' from param name
+        acc[param.slice(1)] = values[index];
+
+        return acc;
+    }, params);
 };

@@ -1,7 +1,13 @@
-import {Registration} from "./components/Registration";
-import {Login} from "./components/Login";
+import App from '../App';
+import Registration from "./components/Registration";
+import Login from "./components/Login";
+import UserInfo from "./components/UserInfo";
 
-const routes = [
+export default [
+    {
+        component: App,
+        href: '/'
+    },
     {
         component: Registration,
         href: '/Registration'
@@ -9,7 +15,9 @@ const routes = [
     {
         component: Login,
         href: '/login'
+    },
+    {
+        component: UserInfo,
+        href: '/UserInfo'
     }
 ];
-
-export {routes};
